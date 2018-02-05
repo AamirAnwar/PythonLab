@@ -49,7 +49,45 @@ class Graph(object):
             return None
         for node in self._graph[start]:
             if node not in path:
-                newPath = self.findPath(graph,node,end,path)
+                newPath = self.findPath(node,end,path)
             if newPath:
                 return newPath
         return None
+
+
+    def DFSUtil(self, start, visited):
+        visited.add(start)
+        for node in self._graph[start]:
+            if not node in visited:
+                self.DFSUtil(node, visited)
+        #print("Finished visited all edges from {}".format(start))
+
+
+    def performDFS(self):
+        '''Perform basic depth first search'''
+        keys = self._graph.keys()
+        visited = set()
+        self.DFSUtil(keys[0],visited)
+
+
+
+    def numberOfSCC(self):
+        '''Find total number of strongly connected components. (Only for undirected right now)'''
+        visited = set()
+        count = 0
+        for k in self._graph.keys():
+            if not k in visited:
+                count += 1
+                self.DFSUtil(k,visited)
+        print("Total number of SCCs is {}".format(count))
+        return count
+
+    @staticmethod
+    def getFreeGraph():
+        print("Here's a graph for free!\n")
+        connections = [('A', 'B'), ('B', 'C'), ('B', 'D'),
+                       ('C', 'D'), ('E', 'F'), ('F', 'C')]
+        is_directed = True
+        g = Graph(is_directed, connections)
+        return g
+
