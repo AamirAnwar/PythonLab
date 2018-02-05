@@ -1,3 +1,6 @@
+'''Queue data structure'''
+
+'''Using lists'''
 class Queue:
     def __init__(self):
         self.list = []
@@ -32,4 +35,5 @@ class Queue:
             return last
         else:
             print("Queue is empty!!")
+
 
