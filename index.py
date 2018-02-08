@@ -1,9 +1,8 @@
 print("Welcome to Python Lab!")
-import graph
+'''
+Add code here to test it out
 
-graph.testGraph()
-
-
+'''
 
 
 
