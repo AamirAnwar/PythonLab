@@ -1,58 +1,57 @@
-import sys
 from collections import defaultdict
 from time import sleep
-class Graph(object):
 
-    def __init__(self, directed, connections):
+
+class Graph(object):
+    def __init__(self, directed=False):
         self._graph = defaultdict(list)
         self._directed = directed
-        self.add_connections(connections)
 
-    def add_connections(self,connections):
-        '''Adding connections between a list of vertex tuples'''
-        for node1, node2, weight in connections:
-            self.add(node1, node2, weight)
+    def addConnections(self, connections):
+        for v1, v2, weight in connections:
+            self.add(v1, v2, weight)
 
-    def add(self, node1, node2, weight):
-        '''Adding connection between two vertices'''
-        self._graph[node1].append({node2:weight})
-        if not self._directed:
-            self._graph[node2].append({node1:weight})
+    def add(self, v1, v2, weight):
+        self._graph[v1].append((v2, weight))
+        if self._directed == False:
+            self._graph[v2].append((v1, weight))
 
-    def remove(self, node):
-        '''Remove a node from the graph'''
+    def showGraph(self):
+        for item in self._graph.items():
+            print(item)
+
+    def remove(self, v):
         for n, con in self._graph.items():
-            try:
-                con.remove(node)
-            except KeyError:
-                pass
+            i = 0
+            while i < len(con):
+                vertex, weight = con[i]
+                if vertex == v:
+                    con.remove(con[i])
+                i += 1
         try:
-            del self._graph[node]
+            del self._graph[v]
         except KeyError:
+            print("Key error exception!")
             pass
 
-    def is_adjacent(self, node1, node2):
-        '''Are these two nodes adjacent?'''
-        return node1 in self._graph and node2 in self._graph[node1]
+    def findPath(self, v1, v2, path=[]):
+        path = path + [v1]
+        if v1 == v2:
+            return path
 
+        if not self._graph[v1]:
+            return None
+
+        for vertex, weight in self._graph[v1]:
+            if vertex not in path:
+                newPath = self.findPath(vertex, v2, path)
+                if newPath:
+                    return newPath
+        return None
 
     def __str__(self):
         '''Helpful in debugging'''
         return '{}({})'.format(self.__class__.__name__, dict(self._graph))
-
-    def findPath(self, start, end, path=[]):
-        ''' Find a path between two nodes.This uses backtracking and aggresively pursues unconquered territory'''
-        path = path + [start]
-        if start == end:
-            return path
-        if not self._graph[start]:
-            return None
-        for node in self._graph[start]:
-            if node not in path:
-                newPath = self.findPath(node,end,path)
-            if newPath:
-                return newPath
-        return None
 
 
     def DFSUtil(self, start, visited):
@@ -117,7 +116,61 @@ class Graph(object):
         for i in dist:
             print(i)
 
+    def performDijkstra(self, source):
+        print("Running Dijkstra's algorithm in O(mlogn)...")
+        sleep(2)
 
+        # Holds the vertices we know the shortest paths to
+        X = [source]
+
+        # Holds the shortest path lengths from source to key in the dict
+        D = {source: 0}
+
+        # i = 0
+        # Keep looping until all nodes have been discovered
+        while len(X) < len(self._graph):
+        # while i < 2:
+            # i += 1
+
+            # Find the smallest outgoing from the frontier
+            min = float("inf")
+            minEdge = None
+
+            for sourceVertex in X:
+                # print("Checking source - {}".format(sourceVertex))
+                for endVertex, weight in self._graph[sourceVertex]:
+                    # print("Checking destination - {}".format(endVertex))
+                    if endVertex not in X:
+                        prevWeight = 0
+                        if D[sourceVertex]:
+                            prevWeight += D[sourceVertex]
+                        w = prevWeight + weight
+                        if w < min:
+                            # print("Found min with vertex {}".format(endVertex))
+                            min = w
+                            minEdge = (endVertex, w)
+                    # else:
+                        # print("Skipping {} since already discovered".format(endVertex))
+            if minEdge:
+                v, w = minEdge
+                X.append(v)
+                D[v] = w
+            # print("Length of X is {}".format(len(X)))
+        return D
+
+
+
+
+def testWeightedGraph():
+    graph_connections = [('A', 'B', 4), ('A', 'C', 1), ('A', 'E', 5), ('B', 'A', 4), ('B', 'D', 1),
+                         ('C', 'A', 1), ('C', 'D', 1), ('C', 'F', 2), ('D', 'B', 1), ('D', 'C', 1),
+                         ('E', 'A', 4), ('E', 'F', 1), ('F', 'C', 2), ('F', 'E', 1)]
+    g = Graph(False)
+    g.addConnections(graph_connections)
+    g.showGraph()
+    sourceVertex = 'A'
+    print("Shortest paths from source {} is {} ".format(sourceVertex, g.performDijkstra(sourceVertex)))
+    return g
 
 
 def testGraph():
