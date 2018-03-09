@@ -1,10 +1,4 @@
 
-print("Welcome to Python Lab!")
-
-'''
-The Python Playground!
-'''
-
 # Quicksort
 
 def partition(l,r,a):
