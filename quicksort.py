@@ -18,7 +18,7 @@ def quick_sort(l,r,a):
         quick_sort(l,m - 1,a)
         quick_sort(m+1,r,a)
 
-
-a = [9,8,7,6,5,4,3,2,1]
-quick_sort(0,len(a) - 1,a)
-print(a)
+def testQSort:
+    a = [9,8,7,6,5,4,3,2,1]
+    quick_sort(0,len(a) - 1,a)
+    print(a)
