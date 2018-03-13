@@ -1,48 +1,52 @@
 # Merge Sort
-def merge_subroutine(a,b):
-    # print("Merging {} and {}".format(a,b))
+def merge_subroutine(arr, l, m, r):
+    n1 = m - l + 1
+    n2 = r - m
+
+    L = [0]*(n1)
+    R = [0]*(n2)
+
+    for i in range(n1):
+        L[i] = arr[l + i]
+
+    for j in range(n2):
+        R[j] = arr[m + 1 + j]
+
     i = 0
     j = 0
-    total_length = len(a) + len(b)
-    c = [0]*total_length
-    k = 0
-    while i < len(a) or j < len(b):
-        if i < len(a) and j < len(b):
-            if a[i] < b[j]:
-                c[k] = a[i]
-                i += 1
-            elif a[i] >= b[j]:
-                c[k] = b[j]
-                j += 1
+    k = l
+    while (i < n1 and j < n2):
+        if L[i] <= R[j]:
+            arr[k] = L[i]
+            i += 1
         else:
-            if i < len(a):
-                for counter in range(i,len(a)):
-                    c[k] =  a[counter ]
-                    k += 1
-                i = len(a)
-            elif j < len(b):
-                for counter in range(j,len(b)):
-                    c[k] =  b[counter]
-                    k += 1
-                j = len(b)
-        k = k + 1
-    # print("Merged C = {}".format(c))
-    return c
+            arr[k] = R[j]
+            j += 1
+        k+=1
+
+    while i < n1:
+        arr[k] = L[i]
+        i+=1
+        k+=1
+    while j < n2:
+        arr[k] = R[j]
+        j+=1
+        k+=1
+
 
 def merge_sort(l,r,a):
-    if l >= r:
-        return a[l:r+1]
-    m = int(l + (r-l)/2)
+    if l < r:
+        m = int(l + (r-l)/2)
+        print("Split {} into {} and {}".format(a[l:r+1],a[l:m + 1], a[m + 1:r + 1]))
+        merge_sort(l,m,a)
+        merge_sort(m+1,r,a)
+        print("Merging {} and {}".format(a[l:m + 1], a[m + 1:r + 1]))
+        merge_subroutine(a,l,m,r)
+        print("Merged into {}".format(a[l:r + 1]))
 
-    sub_l = list(a[l:m + 1])
-    sub_r = list(a[m + 1:r + 1])
-    # print("Splitting!{} into {} | {}".format(a[l:r + 1], sub_l, sub_r))
-    sub_a = merge_sort(l,m,a)
-    sub_b = merge_sort(m+1,r,a)
-    return merge_subroutine(sub_a, sub_b)
-
-
-a = [9,8,7,2,3,1,23, -1,-2,-3,-6,-7,33,55,77]
-print(merge_sort(0, len(a) - 1, a))
+def test_merge_sort():
+    a = [9,8,7,6,5,4,3,2,1]
+    merge_sort(0, len(a) - 1, a)
+    print("Done! => {}".format(a))
 
 
