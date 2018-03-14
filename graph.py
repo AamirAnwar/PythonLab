@@ -1,4 +1,6 @@
 from collections import defaultdict
+from queue import Queue
+from stack import Stack
 from time import sleep
 
 
@@ -69,6 +71,47 @@ class Graph(object):
         self.DFSUtil(keys[0],visited)
 
 
+    def depthFirstSearch(self):
+        print("Running depth first search in O(V + E)...")
+        sleep(1)
+        S = Stack()
+        op = []
+        S.push('A')
+        self._dfs(S,op)
+
+    def _dfs(self, S, op):
+        if S.isEmpty():
+            return
+        current = S.peek()
+        for v in self._graph[current]:
+            if v[0] not in op and v[0] not in S.list:
+                S.push(v[0])
+                self._dfs(S,op)
+        e = S.pop()
+        print(e, end=" => ")
+        op.append(e)
+
+
+
+
+    def performBFS(self):
+        print("Running Breadth first search in  O(V + E)...")
+        sleep(2)
+        q = Queue()
+        q.enqueue('A')
+        op = []
+        self._bfs(q,op)
+
+    def _bfs(self, q, op):
+        if q.isEmpty():
+            return
+        e = q.dequeue()
+        print(e, end=" => ")
+        for v in self._graph[e]:
+            if v[0] not in q.list and v[0] not in op:
+                q.enqueue(v[0])
+        op.append(e)
+        self._bfs(q,op)
 
     def numberOfSCC(self):
         '''Find total number of strongly connected components. (Only for undirected right now)'''
@@ -82,6 +125,8 @@ class Graph(object):
         return count
 
     def floyd_warshall_algorithm(self):
+        print("Floyd Warshall starting up...")
+        sleep(1)
         n = len(self._graph)
         dist = []*n
         index_map = {'A':0,'B':1,'C':2,'D':3,'E':4,'F':5}
@@ -93,9 +138,11 @@ class Graph(object):
         for k in self._graph:
             edges = self._graph[k]
             i = index_map[k]
+
             for e in edges:
-                edge =list(e.keys())[0]
-                weight = list(e.values())[0]
+                print(e)
+                edge = e[0]
+                weight = e[1]
                 j = index_map[edge]
 
                 try:
@@ -169,7 +216,9 @@ def testWeightedGraph():
     g.addConnections(graph_connections)
     g.showGraph()
     sourceVertex = 'A'
-    print("Shortest paths from source {} is {} ".format(sourceVertex, g.performDijkstra(sourceVertex)))
+    # print("Shortest paths from source {} is {} ".format(sourceVertex, g.performDijkstra(sourceVertex)))
+    # g.performBFS()
+    g.depthFirstSearch()
     return g
 
 
@@ -178,8 +227,8 @@ def testGraph():
     connections = [('A', 'B', 3), ('B', 'C', 1), ('B', 'D', 2),
                    ('C', 'D', 4), ('E', 'F', 5), ('F', 'C', 5),('A','E',2)]
     is_directed = False
-    g = Graph(is_directed, connections)
-    print("Floyd Warshall starting up...")
-    sleep(1)
-    g.floyd_warshall_algorithm()
+    g = Graph(is_directed)
+    g.addConnections(connections)
+    g.performBFS()
+    # g.floyd_warshall_algorithm()
     return g

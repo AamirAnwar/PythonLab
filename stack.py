@@ -8,19 +8,20 @@ class Stack:
 
     def push(self,data):
         self.list.append(data)
-        print("Pushed {}".format(data))
+        # print("Pushed {}".format(data))
 
     def pop(self):
         if not self.isEmpty():
             popped = self.list.pop()
-            print("Popping stack now! Element remove is {}".format(popped))
+            # print("Popping stack now! Element remove is {}".format(popped))
             return popped
         else:
             print("Empty Stack!")
 
     def isEmpty(self):
-        if len(self.list) <= 0:
-            return True
+        return len(self.list) <= 0
+
+
 
     def peek(self):
         if len(self.list) > 0:
