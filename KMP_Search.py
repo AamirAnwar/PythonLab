@@ -5,7 +5,6 @@
 def kmp_search(pat, txt):
     M = len(pat)
     N = len(txt)
-
     lps = [0]*M
     compute_lps_array(pat,M,lps)
     i = 0
@@ -39,6 +38,8 @@ def compute_lps_array(pat, M, lps):
             else:
                 lps[i] = 0
                 i += 1
+    # print(list(pat))
+    # print(lps)
 
 
 def test_KMP():
