@@ -39,7 +39,7 @@ def move_queen(board, i):
         else:
             continue
 
-def place_queens(n=10):
+def place_queens(n=4):
     board = []
     for i in range(n):
         t = [0]*n
