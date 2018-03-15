@@ -4,5 +4,5 @@ print("Welcome to Python Lab!")
 The Python Playground!
 '''
 
-import palindromic_partitions
-palindromic_partitions.test()
+import word_break_problem
+word_break_problem.test()
