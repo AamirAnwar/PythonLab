@@ -4,5 +4,5 @@ print("Welcome to Python Lab!")
 The Python Playground!
 '''
 
-import prim_algorithm
-prim_algorithm.test()
+import kruskal_algorithm
+kruskal_algorithm.test()
