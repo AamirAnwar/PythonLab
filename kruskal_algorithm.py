@@ -4,14 +4,12 @@ from collections import defaultdict
 
 
 def find_parent(parent, vertex):
-
     if parent[vertex] == vertex:
         return vertex
     else:
         return find_parent(parent, parent[vertex])
 
 def union(parent,rank,x,y):
-
     xroot = find_parent(parent, x)
     yroot = find_parent(parent, y)
 
@@ -24,19 +22,20 @@ def union(parent,rank,x,y):
         rank[xroot] += 1
 
 def kruskal_mst(g):
-
     # Sort all edges
     result = []
     V = len(g)
     rank = {}
     parent = {}
     edge_list = []
+
+    # This creates a list of edges with source and destination sorted by edge weight
     for i in g:
         edges = g[i]
         for e in edges:
             edge_list.append((i,e[0],e[1]))
-
     edge_list = sorted(edge_list, key = lambda x:x[2])
+    
     for vertex in g:
         parent[vertex] = vertex
         rank[vertex] = 0
