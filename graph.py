@@ -222,6 +222,14 @@ def testWeightedGraph():
     return g
 
 
+def createTestGraph(is_directed=False):
+    connections = [('A', 'B', 3), ('B', 'C', 1), ('B', 'D', 2),
+                   ('C', 'D', 4), ('E', 'F', 5), ('F', 'C', 5), ('A', 'E', 2)]
+    g = Graph(is_directed)
+    g.addConnections(connections)
+    return g
+
+
 def testGraph():
     print("Here's a graph for free!\n")
     connections = [('A', 'B', 3), ('B', 'C', 1), ('B', 'D', 2),
