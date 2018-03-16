@@ -4,6 +4,7 @@ print("Welcome to Python Lab!")
 The Python Playground!
 '''
 
+# For n disks, total 2^n – 1 moves are required.
 def towersOfHanoi(n,from_stack,to_stack,aux_stack):
     if n == 1:
         print("Moved disc {} from {} to {}".format(n,from_stack, to_stack))
