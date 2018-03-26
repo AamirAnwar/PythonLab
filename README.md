@@ -3,6 +3,9 @@ A collection of Data structures, Algorithms and interesting problems implemented
 
 ![logo](https://github.com/AamirAnwar/PythonLab/raw/master/Github_Art.png)
 
+## How to run programs
+ Use index.py acts as the main executable depending on your config. Best to import whatever you want and run it there  :running:
+
 ## Topics
 
 - Stacks
