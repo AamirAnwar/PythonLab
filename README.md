@@ -4,7 +4,7 @@ A collection of Data structures, Algorithms and interesting problems implemented
 ![logo](https://github.com/AamirAnwar/PythonLab/raw/master/Github_Art.png)
 
 ## How to run programs
- Use index.py acts as the main executable depending on your config. Best to import whatever you want and run it there  :running:gs
+ Use index.py acts as the main executable depending on your config. Best to import whatever you want and run it there  :running:
 
 ## Topics
 
@@ -35,7 +35,7 @@ A collection of Data structures, Algorithms and interesting problems implemented
 - Kruskal Algorithm for finding the Minimum Spanning Tree in a Weighted Graph
 - Linked List (Complete Implementation)
 - Merge Sort
-- N Queen Problem :point_right: [Wiki](https://en.wikipedia.org/wiki/Eight_queens_puzzle)
+- N Queen Problem g:point_right: [Wiki](https://en.wikipedia.org/wiki/Eight_queens_puzzle)
 - Given a string generate all possible Palindromic Partitions
 - Prim's Algorithm for finding the Minimum Spanning Tree in a Weighted Graph
 - Queue (Complete Implementation)
