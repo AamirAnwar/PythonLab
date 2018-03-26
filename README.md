@@ -35,7 +35,7 @@ A collection of Data structures, Algorithms and interesting problems implemented
 - Kruskal Algorithm for finding the Minimum Spanning Tree in a Weighted Graph
 - Linked List (Complete Implementation)
 - Merge Sort
-- N Queen Problem g:point_right: [Wiki](https://en.wikipedia.org/wiki/Eight_queens_puzzle)
+- N Queen Problem :point_right: [Wiki](https://en.wikipedia.org/wiki/Eight_queens_puzzle)
 - Given a string generate all possible Palindromic Partitions
 - Prim's Algorithm for finding the Minimum Spanning Tree in a Weighted Graph
 - Queue (Complete Implementation)
