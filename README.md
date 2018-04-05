@@ -49,3 +49,4 @@ A collection of Data structures, Algorithms and interesting problems implemented
 - Trie
 - Word Break Problem
 - Z Algorithm for Substring Search
+- Print all combinations of a string
